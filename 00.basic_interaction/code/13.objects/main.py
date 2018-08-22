@@ -9,7 +9,7 @@ def main():
     state = GameState()
     text = Text("Hello, world :)")
 
-    while not(state.get_quit()):
+    while not(state.quit):
         inputs(state)
         update(state, text)
         draw(screen, text)
@@ -21,12 +21,12 @@ def inputs(state):
         if event.type == pygame.QUIT:
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            state.set_key(True) 
+            state.key = True 
             
 def update(state, text):
-    if state.get_key():
+    if state.key:
         text.change_text("How are you ?")
-        state.set_quit(True)
+        state.quit = True
 
 def draw(screen, text):
     screen.fill((0, 0, 150))
