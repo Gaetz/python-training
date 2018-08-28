@@ -6,7 +6,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(None, 24)
-    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\06.deplacement_sol\\'
+    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\07.copain\\'
     background = pygame.image.load(path+'background.png').convert()
     ground = pygame.image.load(path+'ground.png').convert()
 
@@ -17,6 +17,9 @@ def main():
     spr_speed = 2
     goal_x = 0
     
+    copain_x, copain_y = 500, 400
+    copain_surface = pygame.image.load(path+'copain.png').convert()
+
     cursor = pygame.image.load(path+'cursor.png').convert_alpha() # Transparence du curseur
     pygame.mouse.set_visible(False)
 
@@ -50,6 +53,7 @@ def main():
         screen.fill((0, 0, 0))
         screen.blit(background, (0, 0))
         screen.blit(ground, (0, 500))
+        screen.blit(copain_surface, (copain_x, copain_y))
         screen.blit(spr_surface, (spr_x, spr_y))
         screen.blit(cursor, cursor_pos)
         pygame.display.update()
