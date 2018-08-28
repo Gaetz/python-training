@@ -21,8 +21,7 @@ def main():
                     quit = False
 
         # Update
-        pass
-
+        
         
         # Draw
         screen.fill((0, 0, 0))
