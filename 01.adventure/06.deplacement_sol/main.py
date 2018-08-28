@@ -1,4 +1,4 @@
-import pygame, time, sys
+import pygame, time, sys, math
 
 def main():
 
@@ -6,11 +6,16 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(None, 24)
-    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\04.teleportation_sprite\\'
+    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\05.teleportation_sol\\'
     background = pygame.image.load(path+'background.png').convert()
+    ground = pygame.image.load(path+'ground.png').convert()
+
+    mouse_click = mouse_c_x, mouse_c_y = 0, 0
     spr_surface = pygame.image.load(path+'sprite.png').convert()
-    spr_pos = spr_x, spr_y = 100, 400
+    spr_x, spr_y = 100, 400
     spr_is_moving = False
+    spr_speed = 2
+    goal_x = 0
     
     cursor = pygame.image.load(path+'cursor.png').convert_alpha() # Transparence du curseur
     pygame.mouse.set_visible(False)
@@ -28,18 +33,24 @@ def main():
                     quit = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_click = pygame.mouse.get_pos()
+                goal_x = mouse_click[0]
                 spr_is_moving = True
 
         # Update
         cursor_pos = pygame.mouse.get_pos()
         if(spr_is_moving):
-            spr_pos = mouse_click
-            spr_is_moving = False
+            if(spr_x < goal_x):
+                spr_x = spr_x + spr_speed
+            if(spr_x > goal_x):
+                spr_x = spr_x - spr_speed
+            if(math.fabs(goal_x - spr_x) < spr_speed):
+                spr_is_moving = False
         
         # Draw
         screen.fill((0, 0, 0))
         screen.blit(background, (0, 0))
-        screen.blit(spr_surface, spr_pos)
+        screen.blit(ground, (0, 500))
+        screen.blit(spr_surface, (spr_x, spr_y))
         screen.blit(cursor, cursor_pos)
         pygame.display.update()
 
