@@ -2,7 +2,7 @@ import pygame
 
 class Sprite(object):
 
-    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\09.collision_classe\\'
+    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\12.scene_creation\\'
 
     def __init__(self, x, y, filename, centered):
         self.x = x
@@ -12,6 +12,7 @@ class Sprite(object):
         self.oy = 0
         if(centered):
             self.ox = -self.surface.get_width() / 2
+            self.oy = -self.surface.get_height()
 
 
     def set_position(self, position):

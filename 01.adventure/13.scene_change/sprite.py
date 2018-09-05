@@ -2,7 +2,7 @@ import pygame
 
 class Sprite(object):
 
-    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\09.collision_classe\\'
+    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\13.scene_change\\'
 
     def __init__(self, x, y, filename, centered):
         self.x = x

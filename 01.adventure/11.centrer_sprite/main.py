@@ -12,11 +12,12 @@ def main():
     path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\11.centrer_sprite\\'
     background = pygame.image.load(path+'background.png').convert()
     ground = pygame.image.load(path+'ground.png').convert()
+    ground_height = 600 - ground.get_height()
 
     mouse_click = (0, 0)
 
-    player = SpriteControlled(100, 400, 'sprite.png', True, 2)
-    copain = Sprite(500, 400, 'copain.png', True)
+    player = SpriteControlled(100, ground_height, 'sprite.png', True, 2)
+    copain = Sprite(500, ground_height, 'copain.png', True)
     cursor = Sprite(0, 0, 'cursor.png', False)
     pygame.mouse.set_visible(False)
     collision_text = font.render("Oops, sorry.", False, (0, 0, 0))
@@ -47,7 +48,7 @@ def main():
         copain.draw(screen)
         player.draw(screen)
         if(player.intersects(copain)):
-            screen.blit(collision_text, (player.x, player.y - 100))
+            screen.blit(collision_text, (player.x, player.y - 200))
         cursor.draw(screen)
         
         pygame.display.update()
