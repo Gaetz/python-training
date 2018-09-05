@@ -8,6 +8,7 @@ class Scene:
     path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\14.scene_data\\'
 
     def __init__(self, filename):
+        self.filename = filename
         self.load(filename)
 
     def load(self, filename):
@@ -60,22 +61,17 @@ class Scene:
         for w in self.warps:
             if(w.y == -1):
                 w.y = ground_height - w.surface.get_height() / 2
-    """
-        self.background = Sprite(0, 0, background_file, False)
-        self.ground = Sprite(0, 0, ground_file, False)
-        screen_w, screen_h = pygame.display.get_surface().get_size()
-        ground_height = screen_h - self.ground.surface.get_height()
-        self.ground.y = ground_height
-        self.player = SpriteControlled(10, ground_height, 'sprite.png', True, 2)
-        self.warp = Warp(500, 0, 'warp.png', False, "level01")
-        self.warp.y = ground_height - self.warp.surface.get_height() / 2
-        pass"""
 
     def inputs(self, events):
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_click = pygame.mouse.get_pos()
                 self.player.move_to(mouse_click[0])
+            if event.type == pygame.KEYDOWN:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_F5]:
+                    self.load(self.filename)
+                
 
     def update(self, change_scene):
         self.cursor.set_position(pygame.mouse.get_pos())
