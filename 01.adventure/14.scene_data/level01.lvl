@@ -1,0 +1,6 @@
+background,background
+ground,ground1
+player,sprite,150,ground,2
+sprite,copain,450,ground
+sprite,copain,300,ground
+warp,warp,650,ground,level00
