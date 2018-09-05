@@ -5,7 +5,7 @@ from warp import Warp
 
 class Scene:
     
-    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\14.scene_data\\'
+    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\15.scene_amelioration\\'
 
     def __init__(self, filename):
         self.filename = filename
@@ -49,7 +49,7 @@ class Scene:
                 height = 0
                 if cell[3] == "ground":
                     height = -1
-                warp = Warp(int(cell[2]), height, cell[1]+".png", False, cell[4])
+                warp = Warp(int(cell[2]), height, cell[1]+".png", False, eval(cell[4]))
                 self.warps.append(warp)
 
         # Set heights
@@ -78,7 +78,7 @@ class Scene:
         self.player.update()
         for w in self.warps:
             if(self.player.intersects(w)):
-                change_scene(w.to_scene)
+                change_scene(w.to_scene, w.to_scene_x)
 
     def draw(self, screen):
         self.background.draw(screen)
