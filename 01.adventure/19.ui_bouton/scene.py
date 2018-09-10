@@ -4,6 +4,7 @@ from sprite import Sprite
 from warp import Warp
 from ui_group import UiGroup
 from ui_panel import UiPanel
+from ui_button import UiButton
 
 class Scene:
     
@@ -24,7 +25,9 @@ class Scene:
 
         self.ui_top = UiGroup()
         panel = UiPanel(0, 0, 800, 100)
+        button = UiButton(10, 10, 80, 80)
         self.ui_top.add_element(panel)
+        self.ui_top.add_element(button)
 
         for line in data:
             cell = line.split(";")
@@ -77,7 +80,7 @@ class Scene:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_F5]:
                     self.load(self.filename)
-                
+        self.ui_top.inputs(events)           
 
     def update(self, change_scene):
         self.cursor.set_position(pygame.mouse.get_pos())
@@ -97,5 +100,3 @@ class Scene:
         self.player.draw(screen)
         self.ui_top.draw(screen)
         self.cursor.draw(screen)
-    
-
