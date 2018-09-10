@@ -106,6 +106,11 @@ class Scene:
         self.ui_top.update()
 
     def add_to_inventory(self, item):
+        x = self.inventory.__len__() * 95 + 10
+        y = 10
+        w = 90
+        h = 90
+        self.ui_top.add_element(UiButton(x, y, w, h, item))
         self.inventory.append(item)
 
     def draw(self, screen):
