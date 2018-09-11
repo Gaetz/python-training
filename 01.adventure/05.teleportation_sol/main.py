@@ -16,7 +16,6 @@ def main():
     cursor = pygame.image.load(path+'cursor.png').convert_alpha() # Transparence du curseur
     pygame.mouse.set_visible(False)
 
-    key = False
     quit = False
 
     while not(quit):

@@ -10,7 +10,6 @@ def main():
     background = pygame.image.load(path+'background.png').convert()
     spr_surface = pygame.image.load(path+'sprite.png').convert()
     spr_pos = spr_x, spr_y = 100, 400
-    key = False
     quit = False
 
     while not(quit):
@@ -20,7 +19,7 @@ def main():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit = False
+                    quit = True
 
         # Update
 

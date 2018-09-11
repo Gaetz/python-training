@@ -8,7 +8,6 @@ def main():
     font = pygame.font.Font(None, 24)
     path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\01.afficher_background\\'
     background = pygame.image.load(path+'background.png').convert()
-    key = False
     quit = False
 
     while not(quit):
@@ -18,7 +17,7 @@ def main():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit = False
+                    quit = True
 
         # Update
         
