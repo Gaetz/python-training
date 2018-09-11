@@ -1,0 +1,6 @@
+background;background
+ground;ground
+player;sprite;150;ground;2
+interactive;copain;600;ground;copain00
+warp;warp;700;ground;("level01",50)
+pickable;banana;450;ground

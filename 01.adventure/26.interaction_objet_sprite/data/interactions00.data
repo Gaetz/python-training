@@ -1,0 +1,3 @@
+Type/objet ; Liste de flags ; Cible ; Texte affiché ; activation flag (-1: aucun)
+
+text;[];copain00;Hey tu me bouscules !;-1
