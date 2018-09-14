@@ -1,9 +1,10 @@
 import pygame
 from ui_element import UiElement
 from sprite import Sprite
+from message import Message
 
 class UiButton(UiElement):
-    def __init__(self, x, y, w, h, filename):
+    def __init__(self, x, y, w, h, filename, send_message):
         UiElement.__init__(self, x, y, w, h)
         UiElement.set_event(self, "hover_in", self.on_hover_in)
         UiElement.set_event(self, "hover_out", self.on_hover_out)
@@ -14,7 +15,8 @@ class UiButton(UiElement):
         self.sprite_idle = Sprite(x, y, filename+"_idle.png", False)
         self.sprite_hover = Sprite(x, y, filename+"_hover.png", False)
         self.sprite_click = Sprite(x, y, filename+"_click.png", False)
-        self.current_sprite = self.sprite_idle        
+        self.current_sprite = self.sprite_idle
+        self.send_message = send_message
 
     def on_hover_in(self):
         self.current_sprite = self.sprite_hover
@@ -24,6 +26,7 @@ class UiButton(UiElement):
 
     def on_click(self):
         self.current_sprite = self.sprite_click
+        self.send_message(Message("change_state", "happy"))
 
     def on_release(self):
         if(self.is_hover):
