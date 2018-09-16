@@ -31,9 +31,6 @@ class UiButton(UiElement):
         else:
             self.current_sprite = self.sprite_idle
 
-    def change_sprite(self, sprite):
-        self.current_sprite = sprite
-
     def inputs(self, events):
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
