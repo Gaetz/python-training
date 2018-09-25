@@ -37,10 +37,10 @@ def main():
         nonlocal state
         state = new_state
         reset_keys()
-        change_text()
+        change_text(new_state)
 
-    def change_text():
-        nonlocal text, state
+    def change_text(state):
+        nonlocal text
         if state == 'start':
             text = []
             text.append('Alors du veux créer des jeux vidéo ?')

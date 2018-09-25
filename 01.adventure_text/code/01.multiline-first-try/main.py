@@ -7,7 +7,7 @@ def main():
     path = "c:\\ArtFx\\Cours\\Python\\python-training\\01.adventure_text\\code\\00.start\\"
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(path + "arial.ttf", 24)
-    text = font.render("Hello, world :)", False, (0, 0, 0))
+    text = font.render("Alors tu veux créer des jeux videos ?\n G pour devenir Game Designer\n P pour devenir Programmeur\n", False, (0, 0, 0))
     quit = False
 
     while not(quit):
