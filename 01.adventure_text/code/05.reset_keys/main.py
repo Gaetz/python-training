@@ -15,7 +15,7 @@ def main():
     text.append('P pour devenir Programmeur')
     #text.append('Z pour devenir Producteur')
 
-    quit = False
+    quit_game = False
     key_a = False
     key_g = False
     key_p = False
@@ -29,7 +29,7 @@ def main():
         nonlocal  key_a, key_g, key_p, key_z, key_s, key_m, key_space
         key_a = key_g = key_p = key_z = key_s = key_m = key_space = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

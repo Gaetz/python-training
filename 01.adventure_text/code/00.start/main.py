@@ -8,9 +8,9 @@ def main():
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(path + "arial.ttf", 24)
     text = font.render("Hello, world :)", False, (50, 200, 100))
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

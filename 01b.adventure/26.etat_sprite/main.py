@@ -7,7 +7,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     pygame.mouse.set_visible(False)
-    quit = False
+    quit_game = False
 
     inventory = []
     level00 = Scene("level00.lvl", inventory)
@@ -24,7 +24,7 @@ def main():
         current_scene.player.is_moving = False
         current_scene.after_change()
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         events = pygame.event.get()
         for event in events:

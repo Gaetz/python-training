@@ -7,7 +7,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     pygame.mouse.set_visible(False)
-    quit = False
+    quit_game = False
 
     level00 = Scene("level00.lvl")
     level01 = Scene("level01.lvl")
@@ -22,7 +22,7 @@ def main():
         current_scene.player.x = x
         current_scene.player.is_moving = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         events = pygame.event.get()
         for event in events:
@@ -30,7 +30,7 @@ def main():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit = False
+                    quit_game = True
         current_scene.inputs(events)
 
         # Update

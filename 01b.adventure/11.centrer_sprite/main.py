@@ -22,9 +22,9 @@ def main():
     pygame.mouse.set_visible(False)
     collision_text = font.render("Oops, sorry.", False, (0, 0, 0))
 
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

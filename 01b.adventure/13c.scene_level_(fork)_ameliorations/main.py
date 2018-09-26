@@ -11,7 +11,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     pygame.mouse.set_visible(False)
-    quit = False
+    quit_game = False
 
     level00 = Level00("background.png", "ground.png")
     level01 = Level01("background.png", "ground1.png")
@@ -26,7 +26,7 @@ def main():
         current_scene.player.x = x
         current_scene.player.is_moving = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         events = pygame.event.get()
         for event in events:

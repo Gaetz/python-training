@@ -4,7 +4,7 @@ def main():
     pygame.init()
 
     load()
-    while not(quit):
+    while not quit_game:
         inputs()
         update()
         draw()
@@ -12,12 +12,12 @@ def main():
     time.sleep(2) # End program after 2 seconds
 
 def load():
-    global screen, font, text, key, quit
+    global screen, font, text, key, quit_game
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(None, 24)
     text = font.render("Hello, world :)", False, (50, 200, 100))
     key = False
-    quit = False
+    quit_game = False
 
 def inputs():
     global key

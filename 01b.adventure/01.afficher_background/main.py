@@ -8,9 +8,9 @@ def main():
     font = pygame.font.Font(None, 24)
     path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\01.afficher_background\\'
     background = pygame.image.load(path+'background.png').convert()
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

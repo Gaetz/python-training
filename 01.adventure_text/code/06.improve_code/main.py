@@ -15,7 +15,7 @@ def main():
     text.append('P pour devenir Programmeur')
     #text.append('Z pour devenir Producteur')
 
-    quit = False
+    quit_game = False
     key_a = False
     key_g = False
     key_p = False
@@ -34,7 +34,7 @@ def main():
         reset_keys()
         state = new_state
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

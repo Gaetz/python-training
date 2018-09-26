@@ -24,9 +24,9 @@ def main():
     pygame.mouse.set_visible(False)
 
     key = False
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

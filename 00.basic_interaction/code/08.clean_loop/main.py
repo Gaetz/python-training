@@ -8,8 +8,8 @@ def main():
     text = font.render("Hello, world :)", False, (50, 200, 100))
 
     key = False
-    quit = False
-    while not(quit):
+    quit_game = False
+    while not quit_game:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 key = True

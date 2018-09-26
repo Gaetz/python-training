@@ -10,8 +10,8 @@ def main():
     screen.blit(text, (10, 10))
 
     key = False
-    quit = False
-    while not(quit):
+    quit_game = False
+    while not quit_game:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 key = True

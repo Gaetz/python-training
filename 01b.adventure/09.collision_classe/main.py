@@ -25,9 +25,9 @@ def main():
     cursor = Sprite(0, 0, 'cursor.png')
     pygame.mouse.set_visible(False)
 
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

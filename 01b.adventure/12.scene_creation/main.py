@@ -17,9 +17,9 @@ def main():
     level00 = Scene("level00", "background.png", "ground.png")
     current_scene = level00
 
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         events = pygame.event.get()
         for event in events:

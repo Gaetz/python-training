@@ -16,16 +16,16 @@ def main():
     cursor = pygame.image.load(path+'cursor.png').convert_alpha() # Transparence du curseur
     pygame.mouse.set_visible(False)
 
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit = False
+                    quit_game = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_click = pygame.mouse.get_pos()
                 spr_is_moving = True

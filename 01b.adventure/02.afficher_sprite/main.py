@@ -10,9 +10,9 @@ def main():
     background = pygame.image.load(path+'background.png').convert()
     spr_surface = pygame.image.load(path+'sprite.png').convert()
     spr_pos = spr_x, spr_y = 100, 400
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

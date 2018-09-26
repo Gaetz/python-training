@@ -8,9 +8,9 @@ def main():
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(path + "arial.ttf", 24)
     text = font.render("Alors tu veux créer des jeux videos ?\n G pour devenir Game Designer\n P pour devenir Programmeur\n", False, (0, 0, 0))
-    quit = False
+    quit_game = False
 
-    while not(quit):
+    while not quit_game:
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
