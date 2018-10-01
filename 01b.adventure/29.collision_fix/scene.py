@@ -10,7 +10,7 @@ from ui_button import UiButton
 
 class Scene:
     
-    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\28.animation\\data\\'
+    path = 'C:\\ArtFx\\Cours\\Python\\python-training\\01b.adventure\\29.collision_fix\\data\\'
 
     def __init__(self, filename, inventory):
         self.inventory = inventory

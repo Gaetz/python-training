@@ -24,6 +24,9 @@ class SpriteAnimated(SpriteControlled):
     def update_width_height(self):
         self.width = self.animations[self.current_animation].get_surface().get_width()
         self.height = self.animations[self.current_animation].get_surface().get_height()
+        if(self.centered):
+            self.ox = -self.width / 2
+            self.oy = -self.height
 
     def draw(self, screen):
         screen.blit(self.animations[self.current_animation].get_surface(), (self.x + self.ox, self.y + self.oy))

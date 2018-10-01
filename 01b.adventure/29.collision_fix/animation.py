@@ -1,7 +1,7 @@
 import pygame
 
 class Animation:
-    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\28.animation\\images\\'
+    path = 'C:\\ArtFx\\Cours\\Python\\python-training\\01b.adventure\\29.collision_fix\\images\\'
     
     def __init__(self, frame_number, frame_speed, image):
         self.frame_number = frame_number
