@@ -5,7 +5,7 @@ from warp import Warp
 
 class Scene:
     
-    path = 'D:\\Code\\ArtFx\\Python\\python-training\\01.adventure\\15.scene_amelioration\\'
+    path = 'C:\\ArtFx\\Cours\\Python\\python-training\\01b.adventure\\15.scene_amelioration\\'
 
     def __init__(self, filename):
         self.filename = filename

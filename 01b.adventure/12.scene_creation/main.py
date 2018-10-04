@@ -27,7 +27,7 @@ def main():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit = True
+                    quit_game = True
         current_scene.inputs(events)
 
         # Update

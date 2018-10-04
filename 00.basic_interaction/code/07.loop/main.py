@@ -18,7 +18,7 @@ def main():
         if key:
             text = font.render("How are you ?", False, (255, 255, 255))
             screen.blit(text, (10, 10))
-            quit = True
+            quit_game = True
         pygame.display.update()
 
     time.sleep(2) # End program after 2 seconds

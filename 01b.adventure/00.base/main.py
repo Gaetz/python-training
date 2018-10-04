@@ -21,7 +21,7 @@ def main():
         # Update
         if key:
             text = font.render("How are you ?", False, (255, 255, 255))
-            quit = True
+            quit_game = True
         
         # Draw
         screen.fill((0, 0, 0))

@@ -24,7 +24,7 @@ def main():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit = True
+                    quit_game = True
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_click = pygame.mouse.get_pos()
                 spr_is_moving = True
