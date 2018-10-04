@@ -1,4 +1,4 @@
-import pygame, time, math
+import pygame, math
 from scene import Scene
 
 def main():

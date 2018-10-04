@@ -1,4 +1,4 @@
-import pygame, time, sys, math
+import pygame, math
 from sprite import Sprite
 from sprite_controlled import SpriteControlled
 from scene import Scene
@@ -31,7 +31,7 @@ def main():
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
-                sys.exit()
+                quit_game = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     quit_game = True

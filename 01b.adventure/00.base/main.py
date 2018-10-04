@@ -1,4 +1,4 @@
-import pygame, time, sys
+import pygame, time
 
 def main():
 
@@ -14,7 +14,7 @@ def main():
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                sys.exit()
+                quit_game = True
             if event.type == pygame.KEYDOWN:
                 key = True
 
