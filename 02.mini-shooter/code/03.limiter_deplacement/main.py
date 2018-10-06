@@ -16,7 +16,7 @@ def main():
     path = os.path.abspath('.') + '/'
 
     # Ajouter les nouvelles variables ici
-    player = pygame.image.load(path+'joueur.png').convert_alpha()
+    joueur = pygame.image.load(path+'joueur.png').convert_alpha()
     key_up = False
     key_down = False
     joueur_x = 0
@@ -103,7 +103,7 @@ def main():
         '''
         screen.fill((0, 0, 0))
         # Dessiner ici
-        screen.blit(player, (joueur_x, joueur_y))
+        screen.blit(joueur, (joueur_x, joueur_y))
 
 
 
