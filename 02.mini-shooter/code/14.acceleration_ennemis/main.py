@@ -84,15 +84,11 @@ def main():
         for index, ennemi in enumerate(liste_ennemis):
             ennemi['x'] = ennemi['x'] + ennemi['vitesse']
             if ennemi['x'] < 0:
-                detruire_ennemi(index)        
+                detruire_ennemi(index)
 
     def effacer_ennemis(ennemis_a_effacer):
         for index in ennemis_a_effacer:
             del liste_ennemis[index]
-        ennemis_a_effacer[:] = []
-
-    def effacer_tous_ennemis():
-        liste_ennemis[:] = []
         ennemis_a_effacer[:] = []
 
     def detruire_ennemi(index):
@@ -120,7 +116,6 @@ def main():
             if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
                 detruire_ennemi(i_ennemi)
                 game_over = True
-                effacer_tous_ennemis()
 
     while not quit_game:
         '''
