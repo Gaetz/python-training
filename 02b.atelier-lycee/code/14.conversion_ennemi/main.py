@@ -1,7 +1,7 @@
 ''' ##################### DEFENDER ##################### '''
+import random
 import os
 import pygame
-import random
 
 def main():
 
@@ -48,18 +48,21 @@ def main():
         for index, tir in enumerate(liste_tir):
             tir['x'] = tir['x'] + tir['vitesse']
             if tir['x'] > ecran_largeur:
-                tirs_a_effacer.append(index)
+                detruire_tir(index)
 
     def effacer_tirs(tirs_a_effacer):
         for index in tirs_a_effacer:
             del liste_tir[index]
         tirs_a_effacer[:] = []
 
+    def detruire_tir(index):
+        tirs_a_effacer.append(index)
+
     liste_ennemis = []
     ennemis_a_effacer = []
 
     def creer_ennemis(y):
-        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha()}
+        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha(), 'mechant': True}
         liste_ennemis.append(ennemi)
 
     def dessiner_ennemis():
@@ -70,15 +73,31 @@ def main():
         for index, ennemi in enumerate(liste_ennemis):
             ennemi['x'] = ennemi['x'] + ennemi['vitesse']
             if ennemi['x'] < 0:
-                ennemis_a_effacer.append(index)
+                detruire_ennemi(index)
 
     def effacer_ennemis(ennemis_a_effacer):
         for index in ennemis_a_effacer:
             del liste_ennemis[index]
         ennemis_a_effacer[:] = []
 
+    def detruire_ennemi(index):
+        ennemis_a_effacer.append(index)
+
+    def convertir_ennemi(index):
+        ennemi = liste_ennemis[index]
+        ennemi['image'] = pygame.image.load(path+'ennemi_converti.png').convert_alpha()
+        ennemi['mechant'] = False
+
     compteur_ennemi = 0
 
+    def collision_tirs_ennemis():
+        for i_ennemi, ennemi in enumerate(liste_ennemis):
+            for i_tir, tir in enumerate(liste_tir):
+                x1, y1, w1, h1 = tir['x'], tir['y'], tir['image'].get_width(), tir['image'].get_height()
+                x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
+                if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
+                    convertir_ennemi(i_ennemi)
+                    detruire_tir(i_tir)
 
     while not fin_du_jeu:
         '''
@@ -158,6 +177,8 @@ def main():
         if compteur_ennemi > 500:
             creer_ennemis(random.randint(0, ecran_hauteur - 120))
             compteur_ennemi = 0
+        # Collisions
+        collision_tirs_ennemis()
 
         '''
         ##################### DRAW #####################

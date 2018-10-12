@@ -1,7 +1,7 @@
 ''' ##################### DEFENDER ##################### '''
+import random
 import os
 import pygame
-import random
 
 def main():
 
@@ -62,7 +62,7 @@ def main():
     ennemis_a_effacer = []
 
     def creer_ennemis(y):
-        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha()}
+        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha(), 'mechant': True}
         liste_ennemis.append(ennemi)
 
     def dessiner_ennemis():
@@ -91,8 +91,8 @@ def main():
                 x1, y1, w1, h1 = tir['x'], tir['y'], tir['image'].get_width(), tir['image'].get_height()
                 x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
                 if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
-                    detruire_ennemi(i_ennemi)
-                    detruire_tir(i_tir)
+                    print("conversion ennemi")
+                    print("destruction tir")
 
     while not fin_du_jeu:
         '''

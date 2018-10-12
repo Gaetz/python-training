@@ -73,7 +73,7 @@ def main():
     ennemis_a_effacer = []
 
     def creer_ennemis(y):
-        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha()}
+        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha(), 'mechant': True}
         liste_ennemis.append(ennemi)
 
     def dessiner_ennemis():
