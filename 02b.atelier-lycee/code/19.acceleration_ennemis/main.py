@@ -94,6 +94,11 @@ def main():
     def detruire_ennemi(index):
         ennemis_a_effacer.append(index)
 
+    def convertir_ennemi(index):
+        ennemi = liste_ennemis[index]
+        ennemi['image'] = pygame.image.load(path+'ennemi_converti.png').convert_alpha()
+        ennemi['mechant'] = False
+
     compteur_ennemi = 0
 
     def collision_tirs_ennemis():
@@ -105,7 +110,7 @@ def main():
                 if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
                     score = score + 1
                     score_text = get_score_text(score)
-                    detruire_ennemi(i_ennemi)
+                    convertir_ennemi(i_ennemi)
                     detruire_tir(i_tir)
 
     def collision_joueur_ennemis():
@@ -114,8 +119,9 @@ def main():
             x1, y1, w1, h1 = joueur_x, joueur_y, joueur_hauteur, joueur_hauteur
             x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
             if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
-                detruire_ennemi(i_ennemi)
-                game_over = True
+                if ennemi['mechant']:
+                    detruire_ennemi(i_ennemi)
+                    game_over = True
 
     while not fin_du_jeu:
         '''
