@@ -11,11 +11,11 @@ def main():
     ###################################################
     '''
     pygame.init()
-    quit_game = False
-    screen = pygame.display.set_mode((1280, 720))
+    fin_du_jeu = False
+    ecran = pygame.display.set_mode((1280, 720))
     path = os.path.abspath('.') + '/'
 
-    # Ajouter les nouvelles variables ici
+    # Ajouter les nouvelles variables et fonctions ici
     joueur = pygame.image.load(path+'joueur.png').convert_alpha()
     key_up = False
     key_down = False
@@ -39,13 +39,13 @@ def main():
 
     def dessiner_tirs():
         for tir in liste_tir:
-            screen.blit(tir['image'], (tir['x'], tir['y']))
+            ecran.blit(tir['image'], (tir['x'], tir['y']))
 
     def deplacer_tirs():
         for tir in liste_tir:
             tir['x'] = tir['x'] + tir['vitesse']
 
-    while not quit_game:
+    while not fin_du_jeu:
         '''
         #################### INPUTS ######################
         Ici seront gérées les commandes du jeu
@@ -71,11 +71,11 @@ def main():
         '''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit_game = True
+                fin_du_jeu = True
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit_game = True
+                    fin_du_jeu = True
                 # Ajouter les touches qu'on appuie ici
                 if event.key == pygame.K_UP:
                     key_up = True
@@ -121,16 +121,16 @@ def main():
         ##################### DRAW #####################
         Draw dessine ce que l'on voit à l'écran. On peut
         dessiner des surfaces ou des textes. Avant de
-        dessiner on efface l'écran avec screen.fill(...)
+        dessiner on efface l'écran avec ecran.fill(...)
 
-        Pour dessiner, il faut ajouter après screen.fill(...):
+        Pour dessiner, il faut ajouter après ecran.fill(...):
 
-        screen.blit(variable_de_ce_qu_on_dessine, (x, y))
+        ecran.blit(variable_de_ce_qu_on_dessine, (x, y))
         ################################################
         '''
-        screen.fill((0, 0, 0))
+        ecran.fill((0, 0, 0))
         # Dessiner ici
-        screen.blit(joueur, (joueur_x, joueur_y))
+        ecran.blit(joueur, (joueur_x, joueur_y))
         dessiner_tirs()
 
 
