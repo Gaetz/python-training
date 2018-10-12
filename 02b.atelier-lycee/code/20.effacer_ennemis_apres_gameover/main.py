@@ -83,7 +83,7 @@ def main():
     def deplacer_ennemis():
         for index, ennemi in enumerate(liste_ennemis):
             ennemi['x'] = ennemi['x'] + ennemi['vitesse']
-            if ennemi['x'] < 0:
+            if ennemi['x'] < -120:
                 detruire_ennemi(index)        
 
     def effacer_ennemis(ennemis_a_effacer):
