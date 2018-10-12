@@ -17,9 +17,11 @@ def main():
 
     # Ajouter les nouvelles variables et fonctions ici
     joueur = pygame.image.load(path+'joueur.png').convert_alpha()
-    key_up = False
-    key_down = False
+    touche_haut = False
+    touche_bas = False
     key_space = False
+    tir_emis = False
+
     joueur_x = 0
     joueur_y = 200
     joueur_hauteur = 120
@@ -29,13 +31,19 @@ def main():
 
     liste_tir = []
 
-    def creerTir(y):
-        tir = { 'x': 120, 'y': y, 'vitesse': 5, 'image': pygame.image.load(path+'tir.png').convert_alpha() }
+    def creer_tir(y):
+        nonlocal tir_emis
+        tir = {'x': 120, 'y': y, 'vitesse': 5, 'image': pygame.image.load(path+'tir.png').convert_alpha()}
         liste_tir.append(tir)
+        tir_emis = True
 
-    def dessinerTir():
+    def dessiner_tirs():
         for tir in liste_tir:
             ecran.blit(tir['image'], (tir['x'], tir['y']))
+
+    def deplacer_tirs():
+        for tir in liste_tir:
+            tir['x'] = tir['x'] + tir['vitesse']
 
     while not fin_du_jeu:
         '''
@@ -70,18 +78,19 @@ def main():
                     fin_du_jeu = True
                 # Ajouter les touches qu'on appuie ici
                 if event.key == pygame.K_UP:
-                    key_up = True
+                    touche_haut = True
                 if event.key == pygame.K_DOWN:
-                    key_down = True
+                    touche_bas = True
                 if event.key == pygame.K_SPACE:
                     key_space = True
+                    tir_emis = False
 
             if event.type == pygame.KEYUP:
                 # Ajouter les touches qu'on relache ici
                 if event.key == pygame.K_UP:
-                    key_up = False
+                    touche_haut = False
                 if event.key == pygame.K_DOWN:
-                    key_down = False
+                    touche_bas = False
                 if event.key == pygame.K_SPACE:
                     key_space = False
 
@@ -93,18 +102,19 @@ def main():
         ################################################
         '''
         # Ajouter le code Update ici
-        if key_up:
+        if touche_haut:
             joueur_y = joueur_y - 5
-        if key_down:
+        if touche_bas:
             joueur_y = joueur_y + 5
         # Limiter le déplacement
         if joueur_y < 0:
             joueur_y = 0
         if joueur_y > ecran_hauteur - joueur_hauteur:
             joueur_y = ecran_hauteur - joueur_hauteur
-        # Tir
-        if key_space:
-            creerTir(joueur_y)
+        # Tirs
+        if key_space and not tir_emis:
+            creer_tir(joueur_y + 50)
+        deplacer_tirs()
 
 
         '''
@@ -121,7 +131,7 @@ def main():
         ecran.fill((0, 0, 0))
         # Dessiner ici
         ecran.blit(joueur, (joueur_x, joueur_y))
-        dessinerTir()
+        dessiner_tirs()
 
 
         pygame.display.update()

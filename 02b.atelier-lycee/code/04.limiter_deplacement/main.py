@@ -17,10 +17,15 @@ def main():
 
     # Ajouter les nouvelles variables et fonctions ici
     joueur = pygame.image.load(path+'joueur.png').convert_alpha()
-    key_up = False
-    key_down = False
+    touche_haut = False
+    touche_bas = False
     joueur_x = 0
     joueur_y = 200
+    joueur_hauteur = 120
+
+    ecran_hauteur = 720
+    ecran_largeur = 1280
+
 
     while not fin_du_jeu:
         '''
@@ -55,16 +60,16 @@ def main():
                     fin_du_jeu = True
                 # Ajouter les touches qu'on appuie ici
                 if event.key == pygame.K_UP:
-                    key_up = True
+                    touche_haut = True
                 if event.key == pygame.K_DOWN:
-                    key_down = True
+                    touche_bas = True
 
             if event.type == pygame.KEYUP:
                 # Ajouter les touches qu'on relache ici
                 if event.key == pygame.K_UP:
-                    key_up = False
+                    touche_haut = False
                 if event.key == pygame.K_DOWN:
-                    key_down = False
+                    touche_bas = False
 
 
         '''
@@ -74,11 +79,15 @@ def main():
         ################################################
         '''
         # Ajouter le code Update ici
-        if key_up:
+        if touche_haut:
             joueur_y = joueur_y - 5
-        if key_down:
+        if touche_bas:
             joueur_y = joueur_y + 5
-
+        # Limiter le déplacement
+        if joueur_y < 0:
+            joueur_y = 0
+        if joueur_y > ecran_hauteur - joueur_hauteur:
+            joueur_y = ecran_hauteur - joueur_hauteur
 
 
         '''

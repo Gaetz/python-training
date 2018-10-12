@@ -18,23 +18,14 @@ def main():
 
     # Ajouter les nouvelles variables et fonctions ici
     joueur = pygame.image.load(path+'joueur.png').convert_alpha()
-    key_up = False
-    key_down = False
+    touche_haut = False
+    touche_bas = False
     key_space = False
     tir_emis = False
 
     joueur_x = 0
     joueur_y = 200
     joueur_hauteur = 120
-    score = 0
-    game_over = False
-
-    font = pygame.font.Font(path + "arial.ttf", 24)
-    game_over_text = font.render("Game Over", False, (255, 255, 255))
-    score_text = font.render("Score:" + str(score), False, (255, 0, 0))
-
-    def get_score_text(score):
-        return font.render("Score:" + str(score), False, (255, 0, 0))
 
     ecran_hauteur = 720
     ecran_largeur = 1280
@@ -95,19 +86,20 @@ def main():
     compteur_ennemi = 0
 
     def collision_tirs_ennemis():
-        nonlocal score, score_text
         for i_ennemi, ennemi in enumerate(liste_ennemis):
             for i_tir, tir in enumerate(liste_tir):
                 x1, y1, w1, h1 = tir['x'], tir['y'], tir['image'].get_width(), tir['image'].get_height()
                 x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
                 if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
-                    score = score + 1
-                    score_text = get_score_text(score)
                     detruire_ennemi(i_ennemi)
                     detruire_tir(i_tir)
 
+    game_over = False
+    font = pygame.font.Font(path + "arial.ttf", 24)
+    game_over_text = font.render("Game Over", False, (255, 255, 255))
+
     def collision_joueur_ennemis():
-        nonlocal game_over, score
+        nonlocal game_over
         for i_ennemi, ennemi in enumerate(liste_ennemis):
             x1, y1, w1, h1 = joueur_x, joueur_y, joueur_hauteur, joueur_hauteur
             x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
@@ -148,9 +140,9 @@ def main():
                     fin_du_jeu = True
                 # Ajouter les touches qu'on appuie ici
                 if event.key == pygame.K_UP:
-                    key_up = True
+                    touche_haut = True
                 if event.key == pygame.K_DOWN:
-                    key_down = True
+                    touche_bas = True
                 if event.key == pygame.K_SPACE:
                     key_space = True
                     tir_emis = False
@@ -158,9 +150,9 @@ def main():
             if event.type == pygame.KEYUP:
                 # Ajouter les touches qu'on relache ici
                 if event.key == pygame.K_UP:
-                    key_up = False
+                    touche_haut = False
                 if event.key == pygame.K_DOWN:
-                    key_down = False
+                    touche_bas = False
                 if event.key == pygame.K_SPACE:
                     key_space = False
 
@@ -173,9 +165,9 @@ def main():
         '''
         # Ajouter le code Update ici
         if not game_over:
-            if key_up:
+            if touche_haut:
                 joueur_y = joueur_y - 5
-            if key_down:
+            if touche_bas:
                 joueur_y = joueur_y + 5
             # Limiter le déplacement
             if joueur_y < 0:
@@ -200,9 +192,6 @@ def main():
         else:
             if key_space:
                 game_over = False
-                tir_emis = True
-                score = 0
-                score_text = get_score_text(score)
 
         '''
         ##################### DRAW #####################
@@ -223,7 +212,6 @@ def main():
             dessiner_ennemis()
         else:
             ecran.blit(game_over_text, (600, 300))
-        ecran.blit(score_text, (10, 10))
 
         pygame.display.update()
 

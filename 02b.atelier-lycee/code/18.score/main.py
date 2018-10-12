@@ -18,8 +18,8 @@ def main():
 
     # Ajouter les nouvelles variables et fonctions ici
     joueur = pygame.image.load(path+'joueur.png').convert_alpha()
-    key_up = False
-    key_down = False
+    touche_haut = False
+    touche_bas = False
     key_space = False
     tir_emis = False
 
@@ -28,8 +28,6 @@ def main():
     joueur_hauteur = 120
     score = 0
     game_over = False
-    vitesse_apparition_ennemi = 500
-    acceleration_apparition_ennemi = 5
 
     font = pygame.font.Font(path + "arial.ttf", 24)
     game_over_text = font.render("Game Over", False, (255, 255, 255))
@@ -150,9 +148,9 @@ def main():
                     fin_du_jeu = True
                 # Ajouter les touches qu'on appuie ici
                 if event.key == pygame.K_UP:
-                    key_up = True
+                    touche_haut = True
                 if event.key == pygame.K_DOWN:
-                    key_down = True
+                    touche_bas = True
                 if event.key == pygame.K_SPACE:
                     key_space = True
                     tir_emis = False
@@ -160,9 +158,9 @@ def main():
             if event.type == pygame.KEYUP:
                 # Ajouter les touches qu'on relache ici
                 if event.key == pygame.K_UP:
-                    key_up = False
+                    touche_haut = False
                 if event.key == pygame.K_DOWN:
-                    key_down = False
+                    touche_bas = False
                 if event.key == pygame.K_SPACE:
                     key_space = False
 
@@ -175,9 +173,9 @@ def main():
         '''
         # Ajouter le code Update ici
         if not game_over:
-            if key_up:
+            if touche_haut:
                 joueur_y = joueur_y - 5
-            if key_down:
+            if touche_bas:
                 joueur_y = joueur_y + 5
             # Limiter le déplacement
             if joueur_y < 0:
@@ -193,7 +191,7 @@ def main():
             deplacer_ennemis()
             effacer_ennemis(ennemis_a_effacer)
             compteur_ennemi = compteur_ennemi + 1
-            if compteur_ennemi > vitesse_apparition_ennemi - score * acceleration_apparition_ennemi:
+            if compteur_ennemi > 500:
                 creer_ennemis(random.randint(0, ecran_hauteur - 120))
                 compteur_ennemi = 0
             # Collisions

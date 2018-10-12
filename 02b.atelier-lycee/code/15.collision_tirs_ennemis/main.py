@@ -18,8 +18,8 @@ def main():
 
     # Ajouter les nouvelles variables et fonctions ici
     joueur = pygame.image.load(path+'joueur.png').convert_alpha()
-    key_up = False
-    key_down = False
+    touche_haut = False
+    touche_bas = False
     key_space = False
     tir_emis = False
 
@@ -94,19 +94,6 @@ def main():
                     detruire_ennemi(i_ennemi)
                     detruire_tir(i_tir)
 
-    game_over = False
-    font = pygame.font.Font(path + "arial.ttf", 24)
-    game_over_text = font.render("Game Over", False, (255, 255, 255))
-
-    def collision_joueur_ennemis():
-        nonlocal game_over
-        for i_ennemi, ennemi in enumerate(liste_ennemis):
-            x1, y1, w1, h1 = joueur_x, joueur_y, joueur_hauteur, joueur_hauteur
-            x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
-            if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
-                detruire_ennemi(i_ennemi)
-                game_over = True
-
     while not fin_du_jeu:
         '''
         #################### INPUTS ######################
@@ -140,9 +127,9 @@ def main():
                     fin_du_jeu = True
                 # Ajouter les touches qu'on appuie ici
                 if event.key == pygame.K_UP:
-                    key_up = True
+                    touche_haut = True
                 if event.key == pygame.K_DOWN:
-                    key_down = True
+                    touche_bas = True
                 if event.key == pygame.K_SPACE:
                     key_space = True
                     tir_emis = False
@@ -150,9 +137,9 @@ def main():
             if event.type == pygame.KEYUP:
                 # Ajouter les touches qu'on relache ici
                 if event.key == pygame.K_UP:
-                    key_up = False
+                    touche_haut = False
                 if event.key == pygame.K_DOWN:
-                    key_down = False
+                    touche_bas = False
                 if event.key == pygame.K_SPACE:
                     key_space = False
 
@@ -164,35 +151,29 @@ def main():
         ################################################
         '''
         # Ajouter le code Update ici
-        if not game_over:
-            if key_up:
-                joueur_y = joueur_y - 5
-            if key_down:
-                joueur_y = joueur_y + 5
-            # Limiter le déplacement
-            if joueur_y < 0:
-                joueur_y = 0
-            if joueur_y > ecran_hauteur - joueur_hauteur:
-                joueur_y = ecran_hauteur - joueur_hauteur
-            # Tirs
-            if key_space and not tir_emis:
-                creer_tir(joueur_y + 50)
-            deplacer_tirs()
-            effacer_tirs(tirs_a_effacer)
-            # Ennemis
-            deplacer_ennemis()
-            effacer_ennemis(ennemis_a_effacer)
-            compteur_ennemi = compteur_ennemi + 1
-            if compteur_ennemi > 500:
-                creer_ennemis(random.randint(0, ecran_hauteur - 120))
-                compteur_ennemi = 0
-            # Collisions
-            collision_tirs_ennemis()
-            collision_joueur_ennemis()
-        else:
-            if key_space:
-                game_over = False
-                tir_emis = True
+        if touche_haut:
+            joueur_y = joueur_y - 5
+        if touche_bas:
+            joueur_y = joueur_y + 5
+        # Limiter le déplacement
+        if joueur_y < 0:
+            joueur_y = 0
+        if joueur_y > ecran_hauteur - joueur_hauteur:
+            joueur_y = ecran_hauteur - joueur_hauteur
+        # Tirs
+        if key_space and not tir_emis:
+            creer_tir(joueur_y + 50)
+        deplacer_tirs()
+        effacer_tirs(tirs_a_effacer)
+        # Ennemis
+        deplacer_ennemis()
+        effacer_ennemis(ennemis_a_effacer)
+        compteur_ennemi = compteur_ennemi + 1
+        if compteur_ennemi > 500:
+            creer_ennemis(random.randint(0, ecran_hauteur - 120))
+            compteur_ennemi = 0
+        # Collisions
+        collision_tirs_ennemis()
 
         '''
         ##################### DRAW #####################
@@ -207,12 +188,9 @@ def main():
         '''
         ecran.fill((0, 0, 0))
         # Dessiner ici
-        if not game_over:
-            ecran.blit(joueur, (joueur_x, joueur_y))
-            dessiner_tirs()
-            dessiner_ennemis()
-        else:
-            ecran.blit(game_over_text, (600, 300))
+        ecran.blit(joueur, (joueur_x, joueur_y))
+        dessiner_tirs()
+        dessiner_ennemis()
 
         pygame.display.update()
 
