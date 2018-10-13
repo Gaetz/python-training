@@ -33,7 +33,7 @@ def main():
         tir = { 'x': 120, 'y': y, 'vitesse': 5, 'image': pygame.image.load(path+'tir.png').convert_alpha() }
         liste_tir.append(tir)
 
-    def dessiner_tir():
+    def dessiner_tirs():
         for tir in liste_tir:
             ecran.blit(tir['image'], (tir['x'], tir['y']))
 
@@ -121,7 +121,7 @@ def main():
         ecran.fill((0, 0, 0))
         # Dessiner ici
         ecran.blit(joueur, (joueur_x, joueur_y))
-        dessiner_tir()
+        dessiner_tirs()
 
 
         pygame.display.update()

@@ -72,7 +72,6 @@ def main():
             ecran.blit(ennemi['image'], (ennemi['x'], ennemi['y']))
 
     def deplacer_ennemis():
-        nonlocal vies
         for index, ennemi in enumerate(liste_ennemis):
             ennemi['x'] = ennemi['x'] + ennemi['vitesse']
             if ennemi['x'] < -120:

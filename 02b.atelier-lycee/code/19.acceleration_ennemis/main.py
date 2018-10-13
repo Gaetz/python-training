@@ -99,7 +99,6 @@ def main():
     compteur_ennemi = 0
 
     def collision_tirs_ennemis():
-        nonlocal score, score_text
         for i_ennemi, ennemi in enumerate(liste_ennemis):
             for i_tir, tir in enumerate(liste_tir):
                 x1, y1, w1, h1 = tir['x'], tir['y'], tir['image'].get_width(), tir['image'].get_height()
@@ -109,7 +108,7 @@ def main():
                     detruire_tir(i_tir)
 
     def collision_joueur_ennemis():
-        nonlocal game_over, score
+        nonlocal game_over
         for i_ennemi, ennemi in enumerate(liste_ennemis):
             x1, y1, w1, h1 = joueur_x, joueur_y, joueur_hauteur, joueur_hauteur
             x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
