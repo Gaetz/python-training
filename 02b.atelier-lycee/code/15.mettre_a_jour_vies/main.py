@@ -1,7 +1,7 @@
 ''' ##################### DEFENDER ##################### '''
+import random
 import os
 import pygame
-import random
 
 def main():
 
@@ -72,6 +72,7 @@ def main():
             ecran.blit(ennemi['image'], (ennemi['x'], ennemi['y']))
 
     def deplacer_ennemis():
+        nonlocal vies
         for index, ennemi in enumerate(liste_ennemis):
             ennemi['x'] = ennemi['x'] + ennemi['vitesse']
             if ennemi['x'] < -120:
@@ -82,13 +83,13 @@ def main():
             del liste_ennemis[index]
         ennemis_a_effacer[:] = []
 
+    def detruire_ennemi(index):
+        ennemis_a_effacer.append(index)
+
     def convertir_ennemi(index):
         ennemi = liste_ennemis[index]
         ennemi['image'] = pygame.image.load(path+'ennemi_converti.png').convert_alpha()
         ennemi['mechant'] = False
-
-    def detruire_ennemi(index):
-        ennemis_a_effacer.append(index)
 
     compteur_ennemi = 0
 
@@ -101,16 +102,7 @@ def main():
                     convertir_ennemi(i_ennemi)
                     detruire_tir(i_tir)
 
-    def collision_joueur_ennemis():
-        nonlocal game_over
-        for i_ennemi, ennemi in enumerate(liste_ennemis):
-            x1, y1, w1, h1 = joueur_x, joueur_y, joueur_hauteur, joueur_hauteur
-            x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
-            if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
-                if ennemi['mechant']:
-                    detruire_ennemi(i_ennemi)
-                    game_over = True
-
+    
     # Vies
     font = pygame.font.Font(path + "arial.ttf", 24)
     vies = 3
@@ -118,11 +110,6 @@ def main():
 
     def maj_vies_texte(vies):
         return font.render("Vies: " + str(vies), False, (255, 0, 0))
-
-    # Game over
-    game_over = False
-    game_over_text = font.render("Game Over", False, (255, 255, 255))
-
 
     while not fin_du_jeu:
         '''
@@ -181,48 +168,37 @@ def main():
         ################################################
         '''
         # Ajouter le code Update ici
-        if not game_over:
-            if touche_haut:
-                joueur_y = joueur_y - 5
-            if touche_bas:
-                joueur_y = joueur_y + 5
-            # Limiter le déplacement
-            if joueur_y < 0:
-                joueur_y = 0
-            if joueur_y > ecran_hauteur - joueur_hauteur:
-                joueur_y = ecran_hauteur - joueur_hauteur
-            # Tirs
-            if key_space and not tir_emis:
-                creer_tir(joueur_y + 50)
-            deplacer_tirs()
-            effacer_tirs(tirs_a_effacer)
-            # Ennemis
-            deplacer_ennemis()
-            effacer_ennemis(ennemis_a_effacer)
-            compteur_ennemi = compteur_ennemi + 1
-            if compteur_ennemi > 500:
-                creer_ennemis(random.randint(0, ecran_hauteur - 120))
-                compteur_ennemi = 0
-            # Collisions
-            collision_tirs_ennemis()
-            collision_joueur_ennemis()
-            # Décrémentation vies
-            for ennemi in liste_ennemis:
-                if ennemi['x'] <= 0:
-                    if ennemi['mechant']:
-                        if not ennemi['vie_decrementee']:
-                            vies = vies - 1
-                            vies_texte = maj_vies_texte(vies)
-                            ennemi['vie_decrementee'] = True
-                            if vies <= 0:
-                                game_over = True
-                    
-        else:
-            if key_space:
-                game_over = False
-                tir_emis = True
-                vies = 3
-                vies_texte = maj_vies_texte(vies)
+        if touche_haut:
+            joueur_y = joueur_y - 5
+        if touche_bas:
+            joueur_y = joueur_y + 5
+        # Limiter le déplacement
+        if joueur_y < 0:
+            joueur_y = 0
+        if joueur_y > ecran_hauteur - joueur_hauteur:
+            joueur_y = ecran_hauteur - joueur_hauteur
+        # Tirs
+        if key_space and not tir_emis:
+            creer_tir(joueur_y + 50)
+        deplacer_tirs()
+        effacer_tirs(tirs_a_effacer)
+        # Ennemis
+        deplacer_ennemis()
+        effacer_ennemis(ennemis_a_effacer)
+        compteur_ennemi = compteur_ennemi + 1
+        if compteur_ennemi > 500:
+            creer_ennemis(random.randint(0, ecran_hauteur - 120))
+            compteur_ennemi = 0
+        # Collisions
+        collision_tirs_ennemis()
+        # Décrémentation vies
+        for ennemi in liste_ennemis:
+            if ennemi['x'] <= 0:
+                if ennemi['mechant']:
+                    if not ennemi['vie_decrementee']:
+                        vies = vies - 1
+                        vies_texte = maj_vies_texte(vies)
+                        ennemi['vie_decrementee'] = True
 
         '''
         ##################### DRAW #####################
@@ -237,13 +213,11 @@ def main():
         '''
         ecran.fill((0, 0, 0))
         # Dessiner ici
-        if not game_over:
-            ecran.blit(joueur, (joueur_x, joueur_y))
-            dessiner_tirs()
-            dessiner_ennemis()
-            ecran.blit(vies_texte, (20, 20))
-        else:
-            ecran.blit(game_over_text, (600, 300))
+        ecran.blit(joueur, (joueur_x, joueur_y))
+        dessiner_tirs()
+        dessiner_ennemis()
+        ecran.blit(vies_texte, (20, 20))
+
 
         pygame.display.update()
 

@@ -30,6 +30,7 @@ def main():
     ecran_hauteur = 720
     ecran_largeur = 1280
 
+    # Tirs
     tirs_a_effacer = []
     liste_tir = []
     random.seed()
@@ -58,6 +59,7 @@ def main():
     def detruire_tir(index):
         tirs_a_effacer.append(index)
 
+    # Ennemis
     liste_ennemis = []
     ennemis_a_effacer = []
 
@@ -98,6 +100,14 @@ def main():
                 if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
                     convertir_ennemi(i_ennemi)
                     detruire_tir(i_tir)
+
+    
+    # Vies
+    font = pygame.font.Font(path + "arial.ttf", 24)
+    vies = 3
+    vies_texte = font.render("Vies: " + str(vies), False, (255, 0, 0))
+
+    
 
     while not fin_du_jeu:
         '''
@@ -196,6 +206,8 @@ def main():
         ecran.blit(joueur, (joueur_x, joueur_y))
         dessiner_tirs()
         dessiner_ennemis()
+        ecran.blit(vies_texte, (20, 20))
+
 
         pygame.display.update()
 

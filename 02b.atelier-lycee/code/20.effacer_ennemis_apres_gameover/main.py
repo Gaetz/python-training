@@ -31,16 +31,10 @@ def main():
     vitesse_apparition_ennemi = 500
     acceleration_apparition_ennemi = 5
 
-    font = pygame.font.Font(path + "arial.ttf", 24)
-    game_over_text = font.render("Game Over", False, (255, 255, 255))
-    score_text = font.render("Score:" + str(score), False, (255, 0, 0))
-
-    def get_score_text(score):
-        return font.render("Score:" + str(score), False, (255, 0, 0))
-
     ecran_hauteur = 720
     ecran_largeur = 1280
 
+    # Tirs
     tirs_a_effacer = []
     liste_tir = []
     random.seed()
@@ -69,11 +63,12 @@ def main():
     def detruire_tir(index):
         tirs_a_effacer.append(index)
 
+    # Ennemis
     liste_ennemis = []
     ennemis_a_effacer = []
 
     def creer_ennemis(y):
-        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha(), 'mechant': True}
+        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha(), 'mechant': True, 'vie_decrementee': False, 'score_augmente':False}
         liste_ennemis.append(ennemi)
 
     def dessiner_ennemis():
@@ -112,8 +107,6 @@ def main():
                 x1, y1, w1, h1 = tir['x'], tir['y'], tir['image'].get_width(), tir['image'].get_height()
                 x2, y2, w2, h2 = ennemi['x'], ennemi['y'], ennemi['image'].get_width(), ennemi['image'].get_height()
                 if(not(x1 + w1 < x2 or x2 + w2 < x1 or y1 + h1 < y2 or y2 + h2 < y1)):
-                    score = score + 1
-                    score_text = get_score_text(score)
                     convertir_ennemi(i_ennemi)
                     detruire_tir(i_tir)
 
@@ -127,6 +120,25 @@ def main():
                     detruire_ennemi(i_ennemi)
                     game_over = True
                     effacer_tous_ennemis()
+
+    # Vies
+    font = pygame.font.Font(path + "arial.ttf", 24)
+    vies = 3
+    vies_texte = font.render("Vies: " + str(vies), False, (255, 0, 0))
+
+    def maj_vies_texte(vies):
+        return font.render("Vies: " + str(vies), False, (255, 0, 0))
+
+    # Game over
+    game_over = False
+    game_over_text = font.render("Game Over", False, (255, 255, 255))
+
+    # Score
+    score_text = font.render("Score: " + str(score), False, (0, 0, 255))
+
+    def maj_score_texte(score):
+        return font.render("Score: " + str(score), False, (0, 0, 255))
+
 
     while not fin_du_jeu:
         '''
@@ -210,12 +222,30 @@ def main():
             # Collisions
             collision_tirs_ennemis()
             collision_joueur_ennemis()
+            # Décrémentation vies
+            for ennemi in liste_ennemis:
+                if ennemi['x'] <= 0:
+                    if ennemi['mechant']:
+                        if not ennemi['vie_decrementee']:
+                            vies = vies - 1
+                            vies_texte = maj_vies_texte(vies)
+                            ennemi['vie_decrementee'] = True
+                            if vies <= 0:
+                                game_over = True
+                                effacer_tous_ennemis()
+                    else:
+                        if not ennemi['score_augmente']:
+                            score = score + 1
+                            score_text = maj_score_texte(score)
+                            ennemi['score_augmente'] = True
         else:
             if key_space:
                 game_over = False
                 tir_emis = True
+                vies = 3
+                vies_texte = maj_vies_texte(vies)
                 score = 0
-                score_text = get_score_text(score)
+                score_text = maj_score_texte(score)
 
         '''
         ##################### DRAW #####################
@@ -234,9 +264,10 @@ def main():
             ecran.blit(joueur, (joueur_x, joueur_y))
             dessiner_tirs()
             dessiner_ennemis()
+            ecran.blit(vies_texte, (20, 20))
         else:
             ecran.blit(game_over_text, (600, 300))
-        ecran.blit(score_text, (10, 10))
+        ecran.blit(score_text, (20, 60))
 
         pygame.display.update()
 

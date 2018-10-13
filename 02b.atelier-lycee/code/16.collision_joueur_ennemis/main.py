@@ -30,6 +30,7 @@ def main():
     ecran_hauteur = 720
     ecran_largeur = 1280
 
+    # Tirs
     tirs_a_effacer = []
     liste_tir = []
     random.seed()
@@ -58,11 +59,12 @@ def main():
     def detruire_tir(index):
         tirs_a_effacer.append(index)
 
+    # Ennemis
     liste_ennemis = []
     ennemis_a_effacer = []
 
     def creer_ennemis(y):
-        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha(), 'mechant': True}
+        ennemi = {'x': ecran_largeur, 'y': y, 'vitesse': -3, 'image': pygame.image.load(path+'ennemi.png').convert_alpha(), 'mechant': True, 'vie_decrementee': False}
         liste_ennemis.append(ennemi)
 
     def dessiner_ennemis():
@@ -99,10 +101,6 @@ def main():
                     convertir_ennemi(i_ennemi)
                     detruire_tir(i_tir)
 
-    game_over = False
-    font = pygame.font.Font(path + "arial.ttf", 24)
-    game_over_text = font.render("Game Over", False, (255, 255, 255))
-
     def collision_joueur_ennemis():
         nonlocal game_over
         for i_ennemi, ennemi in enumerate(liste_ennemis):
@@ -112,6 +110,19 @@ def main():
                 if ennemi['mechant']:
                     detruire_ennemi(i_ennemi)
                     game_over = True
+
+    # Vies
+    font = pygame.font.Font(path + "arial.ttf", 24)
+    vies = 3
+    vies_texte = font.render("Vies: " + str(vies), False, (255, 0, 0))
+
+    def maj_vies_texte(vies):
+        return font.render("Vies: " + str(vies), False, (255, 0, 0))
+
+    # Game over    
+    game_over = False
+    game_over_text = font.render("Game Over", False, (255, 255, 255))
+    
 
     while not fin_du_jeu:
         '''
@@ -195,6 +206,14 @@ def main():
             # Collisions
             collision_tirs_ennemis()
             collision_joueur_ennemis()
+            # Décrémentation vies
+            for ennemi in liste_ennemis:
+                if ennemi['x'] <= 0:
+                    if ennemi['mechant']:
+                        if not ennemi['vie_decrementee']:
+                            vies = vies - 1
+                            vies_texte = maj_vies_texte(vies)
+                            ennemi['vie_decrementee'] = True
         else:
             if key_space:
                 game_over = False
@@ -216,6 +235,7 @@ def main():
             ecran.blit(joueur, (joueur_x, joueur_y))
             dessiner_tirs()
             dessiner_ennemis()
+            ecran.blit(vies_texte, (20, 20))
         else:
             ecran.blit(game_over_text, (600, 300))
 
