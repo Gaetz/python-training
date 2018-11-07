@@ -29,10 +29,10 @@ def main():
         # Inputs
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                quit = True
+                quit_game = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    quit = True
+                    quit_game = True
                 if event.key == pygame.K_q:
                     key_a = True
                 if event.key == pygame.K_g:
