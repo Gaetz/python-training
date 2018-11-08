@@ -14,7 +14,7 @@ def main():
     pygame.init()
     quit_game = False
     screen = pygame.display.set_mode((1280, 720))
-    path = os.path.abspath('.') + '/'
+    path = os.path.abspath('.') + '\\'
 
     # Ajouter les nouvelles variables ici
     joueur = pygame.image.load(path+'joueur.png').convert_alpha()

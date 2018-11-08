@@ -1,14 +1,13 @@
-""" Pong game """
-import pygame
+""" Racer game """
+import pygame, os
 
 def main():
     """ Main function """
     # Load
     pygame.init()
-    path = "c:\\ArtFx\\Cours\\Python\\python-training\\01.adventure_text\\code\\00.start\\"
+    path = os.path.abspath('.') + '/'
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.Font(path + "arial.ttf", 24)
-    text = font.render("Hello, world :)", False, (50, 200, 100))
     quit_game = False
 
     while not quit_game:
@@ -24,7 +23,6 @@ def main():
 
         # Draw
         screen.fill((0, 0, 150))
-        screen.blit(text, (10, 10))
         pygame.display.update()
 
 if __name__ == "__main__":
