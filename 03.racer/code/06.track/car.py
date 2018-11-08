@@ -15,8 +15,7 @@ class Car():
     def update(self, dt):
         self.x = self.x + self.velocity * math.cos(math.radians(self.angle)) * dt
         self.y = self.y + self.velocity * math.sin(math.radians(self.angle)) * dt
-        self.velocity = self.velocity * 0.96
-        
+        self.velocity = self.velocity * 0.96        
 
     def turn_left(self, dt):
         self.angle = self.angle - 180 * dt

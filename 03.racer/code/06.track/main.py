@@ -5,6 +5,7 @@ import math
 import time
 
 from car import Car
+from track import Track
 
 def main():
     """ Main function """
@@ -26,6 +27,7 @@ def main():
 
     car = Car(200, 300, path + "images/car.png")
     car2 = Car(500, 300, path + "images/car-alt.png")
+    track = Track()
 
     dt = 60 / 1000
     clock = pygame.time.Clock()
@@ -97,6 +99,7 @@ def main():
         # Draw
         screen.fill((0, 0, 0))
 
+        track.draw(screen)
         car.draw(screen)
         car2.draw(screen)
 

@@ -11,7 +11,7 @@ def main():
     # Load
     pygame.init()
     path = os.path.abspath('.') + '/'
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode((1280, 720))
     font = pygame.font.Font(path + "arial.ttf", 24)
     quit_game = False
 
