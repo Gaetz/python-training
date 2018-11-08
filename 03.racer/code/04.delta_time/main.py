@@ -2,6 +2,9 @@
 import pygame
 import os
 import math
+import time
+
+from car import Car
 
 def main():
     """ Main function """
@@ -12,21 +15,20 @@ def main():
     font = pygame.font.Font(path + "arial.ttf", 24)
     quit_game = False
 
-    car = pygame.image.load(path+"images/car.png").convert_alpha()
-    r_car = pygame.image.load(path+"images/car.png").convert_alpha()
-    car_x = 100
-    car_y = 400
-    car_origin_x = -car.get_width() / 2
-    car_origin_y = -car.get_height() / 2
-    car_angle = 0
-    car_velocity = 0
-    car_max_speed = 500
-
     key_up = False
     key_down = False
     key_left = False
     key_right = False
+    key_z = False
+    key_q = False
+    key_s = False
+    key_d = False
 
+    car = Car(200, 300, path + "images/car.png")
+    car2 = Car(500, 300, path + "images/car-alt.png")
+
+    dt = 60 / 1000
+    clock = pygame.time.Clock()
     while not quit_game:
         # Inputs
         for event in pygame.event.get():
@@ -44,6 +46,14 @@ def main():
                     key_left = True
                 if event.key == pygame.K_RIGHT:
                     key_right = True
+                if event.key == pygame.K_w:
+                    key_z = True
+                if event.key == pygame.K_a:
+                    key_q = True
+                if event.key == pygame.K_s:
+                    key_s = True
+                if event.key == pygame.K_d:
+                    key_d = True
             
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_UP:
@@ -54,28 +64,44 @@ def main():
                     key_left = False
                 if event.key == pygame.K_RIGHT:
                     key_right = False
+                if event.key == pygame.K_w:
+                    key_z = False
+                if event.key == pygame.K_a:
+                    key_q = False
+                if event.key == pygame.K_s:
+                    key_s = False
+                if event.key == pygame.K_d:
+                    key_d = False
 
         # Update
+        # - Player 1
         if key_up:
-            car_velocity = car_velocity + 0.04
+            car.accelerate()
         if key_left:
-            car_angle = car_angle - 0.5
+            car.turn_left(dt)
         if key_right:
-            car_angle = car_angle + 0.5
-        if car_velocity > car_max_speed:
-            car_velocity = car_max_speed
+            car.turn_right(dt)
+            
+        car.update(dt)
 
-        car_x = car_x + car_velocity * math.cos(math.radians(car_angle))
-        car_y = car_y + car_velocity * math.sin(math.radians(car_angle))
-        car_velocity = car_velocity * 0.99
+        # - Player 2
+        if key_z:
+            car2.accelerate()
+        if key_q:
+            car2.turn_left(dt)
+        if key_d:
+            car2.turn_right(dt)
+            
+        car2.update(dt)
 
         # Draw
         screen.fill((0, 0, 0))
 
-        r_car = pygame.transform.rotate(car, -car_angle)
-        screen.blit(r_car, (car_x - car_origin_x, car_y - car_origin_y))
+        car.draw(screen)
+        car2.draw(screen)
 
         pygame.display.update()
+        dt = clock.tick(60) / 1000
 
 if __name__ == "__main__":
     main()

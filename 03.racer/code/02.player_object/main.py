@@ -3,6 +3,8 @@ import pygame
 import os
 import math
 
+from car import Car
+
 def main():
     """ Main function """
     # Load
@@ -12,20 +14,12 @@ def main():
     font = pygame.font.Font(path + "arial.ttf", 24)
     quit_game = False
 
-    car = pygame.image.load(path+"images/car.png").convert_alpha()
-    r_car = pygame.image.load(path+"images/car.png").convert_alpha()
-    car_x = 100
-    car_y = 400
-    car_origin_x = -car.get_width() / 2
-    car_origin_y = -car.get_height() / 2
-    car_angle = 0
-    car_velocity = 0
-    car_max_speed = 500
-
     key_up = False
     key_down = False
     key_left = False
     key_right = False
+
+    car = Car(200, 300, path + "images/car.png")
 
     while not quit_game:
         # Inputs
@@ -57,23 +51,18 @@ def main():
 
         # Update
         if key_up:
-            car_velocity = car_velocity + 0.04
+            car.accelerate()
         if key_left:
-            car_angle = car_angle - 0.5
+            car.turn_left()
         if key_right:
-            car_angle = car_angle + 0.5
-        if car_velocity > car_max_speed:
-            car_velocity = car_max_speed
-
-        car_x = car_x + car_velocity * math.cos(math.radians(car_angle))
-        car_y = car_y + car_velocity * math.sin(math.radians(car_angle))
-        car_velocity = car_velocity * 0.99
+            car.turn_right()
+            
+        car.update()
 
         # Draw
         screen.fill((0, 0, 0))
 
-        r_car = pygame.transform.rotate(car, -car_angle)
-        screen.blit(r_car, (car_x - car_origin_x, car_y - car_origin_y))
+        car.draw(screen)
 
         pygame.display.update()
 
