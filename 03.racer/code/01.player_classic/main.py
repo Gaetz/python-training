@@ -72,7 +72,7 @@ def main():
         # Draw
         screen.fill((0, 0, 0))
 
-        r_car = pygame.transform.rotate(car, -car_angle)
+        r_car = pygame.transform.rotate(car, -car_angle) # -90-car_angle
         screen.blit(r_car, (car_x - car_origin_x, car_y - car_origin_y))
 
         pygame.display.update()

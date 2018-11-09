@@ -2,6 +2,7 @@
 import pygame
 import os
 import math
+import time
 
 from car import Car
 
@@ -65,6 +66,7 @@ def main():
         car.draw(screen)
 
         pygame.display.update()
+        time.sleep(0.1)
 
 if __name__ == "__main__":
     main()

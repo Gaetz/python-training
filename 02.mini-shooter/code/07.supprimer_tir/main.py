@@ -48,8 +48,10 @@ def main():
             if tir['x'] > ecran_largeur:
                 tirs_a_effacer.append(index)
 
-    def effacer_tirs(tirs_a_effacer):
-        for index in tirs_a_effacer:
+    def effacer_tirs(bullets_to_erase):
+        #for index in bullets_to_erase:
+        #    del liste_tir[index]
+        for index in range(len(bullets_to_erase) - 1, -1, -1):
             del liste_tir[index]
         tirs_a_effacer[:] = []
 

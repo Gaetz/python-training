@@ -24,7 +24,7 @@ class Car():
 
     def check_collision(self, dt):
         next_tile_row = math.floor(self.next_y(dt) / Track.TILE_HEIGHT)
-        next_tile_col = math.floor(self.next_x(dt) / Track.TILE_WIDTH) + 1
+        next_tile_col = math.floor(self.next_x(dt) / Track.TILE_WIDTH)
         # Track col and row must be in config limit
         if next_tile_col < 0 or next_tile_row < 0 or next_tile_row >= Track.TRACK_ROWS or next_tile_col >= Track.TRACK_COLS:
             return
@@ -62,4 +62,4 @@ class Car():
 
     def draw(self, screen):
         r_car = pygame.transform.rotate(self.image, -self.angle)
-        screen.blit(r_car, (self.x, self.y))
+        screen.blit(r_car, (self.x - 20, self.y - 20))
