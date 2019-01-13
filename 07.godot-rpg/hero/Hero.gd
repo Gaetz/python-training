@@ -19,3 +19,6 @@ func get_input():
 func _physics_process(delta):
     get_input()
     move_and_slide(velocity)
+
+func _on_MapEnemy_area_entered(area):
+	get_tree().change_scene("res://battle/Fight.tscn")

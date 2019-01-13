@@ -36,4 +36,6 @@ position = Vector2( 837.451, 316.302 )
 scale = Vector2( -1, 1 )
 _sections_unfolded = [ "Transform" ]
 
+[connection signal="area_entered" from="MapEnemy" to="Hero" method="_on_MapEnemy_area_entered"]
+
 
