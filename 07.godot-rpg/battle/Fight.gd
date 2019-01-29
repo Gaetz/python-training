@@ -37,7 +37,7 @@ func update_player_phase(delta):
 		$AnimationPlayer.play("hero_move_forward")
 		yield($AnimationPlayer, "animation_finished")
 		
-		AnimationPlayer.play("hero_hit")
+		$AnimationPlayer.play("hero_hit")
 		yield($AnimationPlayer, "animation_finished")
 		if not action_executed:
 			action_executed = true
