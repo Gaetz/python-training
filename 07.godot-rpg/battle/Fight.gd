@@ -36,13 +36,15 @@ func update_player_phase(delta):
 	if(action == 0):
 		$AnimationPlayer.play("hero_move_forward")
 		yield($AnimationPlayer, "animation_finished")
-		$AnimationPlayer.play("hero_hit")
+		
+		AnimationPlayer.play("hero_hit")
 		yield($AnimationPlayer, "animation_finished")
 		if not action_executed:
 			action_executed = true
 			enemy_hp = enemy_hp - player_damage
 			if(enemy_hp <= 0):
 				$Enemy.visible = false
+				
 		$AnimationPlayer.play("hero_move_backward")
 		yield($AnimationPlayer, "animation_finished")
 		$ItemList.unselect(0)
@@ -51,6 +53,7 @@ func update_player_phase(delta):
 		else:
 			action_executed = false
 			phase = BattlePhase.ENEMY_PHASE
+			#turn_phase = TurnPhase.SHALL_MOVE
 	else:
 		player_hp = player_hp + 1
 		$ItemList.unselect(1)
