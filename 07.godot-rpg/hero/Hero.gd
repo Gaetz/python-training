@@ -16,16 +16,6 @@ func get_input():
         velocity.y -= speed
     velocity = velocity.normalized() * speed
 
-func _process(delta):
-	if global.is_position_stored:
-		position = global.restore_player_position()
-		print(position)
-
 func _physics_process(delta):
     get_input()
     move_and_slide(velocity)
-
-func _on_MapEnemy_area_entered(area):
-	get_tree().root.get_node("Map").launch_battle()
-	
-

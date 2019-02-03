@@ -67,7 +67,9 @@ func update_enemy_phase(delta):
 func update_victory(delta):
 	$VictoryPanel.visible = true
 	yield($VictoryPanel/Button, "pressed")
-	get_tree().change_scene("res://Map.tscn")
+	if not map_loaded:
+		map_loaded = true
+		global.load_scene()
 	
 func update_loss(delta):
 	pass
@@ -75,3 +77,4 @@ func update_loss(delta):
 func _on_ItemList_item_selected(index):
 	return index
 
+var map_loaded = false
