@@ -17,6 +17,7 @@ func load_scene():
         get_tree().get_current_scene().queue_free()
         # add saved scene back to the tree
         get_tree().get_root().add_child(saved_scene)
+        get_tree().set_current_scene(saved_scene)
         saved_scene = null
 
 # Position memory - how to store a variable

@@ -39,6 +39,15 @@ scale = Vector2( -1, 1 )
 script = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
+[node name="MapEnemy2" parent="." index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 637.329, 145.646 )
+scale = Vector2( -1, 1 )
+script = ExtResource( 4 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
 [connection signal="area_entered" from="MapEnemy" to="MapEnemy" method="_on_MapEnemy_area_entered"]
+
+[connection signal="area_entered" from="MapEnemy2" to="MapEnemy2" method="_on_MapEnemy_area_entered"]
 
 
