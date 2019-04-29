@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://banque.wav" type="AudioStream" id=1]
+[ext_resource path="res://Audio.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 1.08069, 1.08073 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 119.972
+margin_top = 80.2252
+margin_right = 131.972
+margin_bottom = 100.225
+text = "Sound!"
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="Button"]
+stream = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[connection signal="pressed" from="Button" to="Button/Audio" method="_on_Button_pressed"]
